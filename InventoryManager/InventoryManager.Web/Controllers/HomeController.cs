@@ -17,9 +17,9 @@
             this.clothes = clothes;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sort, string order)
         {
-            var model = await this.clothes.AllClothesAsync();
+            var model = await this.clothes.AllClothesAsync(sort, order);
 
             return View(model);
         }

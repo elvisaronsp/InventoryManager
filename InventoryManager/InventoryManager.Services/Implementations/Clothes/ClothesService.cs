@@ -41,8 +41,9 @@
             await this.db.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<ClothesListingServiceModel>> AllClothesAsync()
-            => await this.db.Clothes
+        public async Task<IEnumerable<ClothesListingServiceModel>> AllClothesAsync(string sort, string order)
+        {
+            var result = await this.db.Clothes
                 .Select(c => new ClothesListingServiceModel
                 {
                     Id = c.Id,
@@ -52,5 +53,30 @@
                     SinglePrice = c.SinglePrice
                 })
                 .ToListAsync();
+
+            var sortType = sort + "_" +order;
+
+            switch (sortType)
+            {
+                case "name_ascending":
+                    return result.OrderBy(c => c.Name);
+                case "name_descending":
+                    return result.OrderByDescending(c => c.Name);
+                case "type_ascending":
+                    return result.OrderBy(c => c.Type);
+                case "type_descending":
+                    return result.OrderByDescending(c => c.Type);
+                case "quantity_ascending":
+                    return result.OrderBy(c => c.Quantity);
+                case "quantity_descending":
+                    return result.OrderByDescending(c => c.Quantity);
+                case "singlePrice_ascending":
+                    return result.OrderBy(c => c.SinglePrice);
+                case "singlePrice_descending":
+                    return result.OrderByDescending(c => c.SinglePrice);
+                default:
+                    return result;
+            }
+        }
     }
 }
