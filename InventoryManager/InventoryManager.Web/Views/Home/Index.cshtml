@@ -5,10 +5,9 @@
 }
 
 <br />
-@if (User.IsInRole(AdministratorRole))
-{
-    <a asp-controller="Clothes" asp-action="Add" class="btn btn-primary">Add product</a>
-}
+
+<a asp-controller="Clothes" asp-action="Add" class="btn btn-primary">Add product</a>
+
 
 <br /><br />
 
@@ -111,12 +110,9 @@
                         <td>
                             @clothes.SinglePrice
                         </td>
-                        @if (User.IsInRole(AdministratorRole))
-                        {
-                            <td>
-                                <a asp-controller="Clothes" asp-action="Details" asp-route-id="@clothes.Id" class="btn btn-default text-center">Details</a>
-                            </td>
-                        }
+                        <td>
+                            <a asp-controller="Clothes" asp-action="Details" asp-route-id="@clothes.Id" class="btn btn-default text-center">Details</a>
+                        </td>
                     </tr>
                 }
             </tbody>

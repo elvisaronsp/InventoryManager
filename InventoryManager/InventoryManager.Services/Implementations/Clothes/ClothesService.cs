@@ -18,6 +18,7 @@
         }
 
         public async Task AddAsync(
+            string userId,
             string name,
             ClothesType type,
             int quantity,
@@ -34,14 +35,15 @@
                 Size = size,
                 SinglePrice = singlePrice,
                 PictureUrl = pictureUrl,
-                Description = description
+                Description = description,
+                OwnerId = userId
             };
 
             this.db.Add(clothes);
             await this.db.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<ClothesListingServiceModel>> AllClothesAsync(string sort, string order)
+        public async Task<IEnumerable<ClothesListingServiceModel>> AllClothesAsync(string userId, string sort, string order)
         {
             var result = await this.db.Clothes
                 .Select(c => new ClothesListingServiceModel
@@ -50,8 +52,10 @@
                     Name = c.Name,
                     Type = c.Type,
                     Quantity = c.Quantity,
-                    SinglePrice = c.SinglePrice
+                    SinglePrice = c.SinglePrice,
+                    OwnerId = c.OwnerId
                 })
+                .Where(c => c.OwnerId == userId)
                 .ToListAsync();
 
             var sortType = sort + "_" +order;
@@ -79,8 +83,8 @@
             }
         }
 
-        public async Task<bool> ProductExistAsync(int id)
-            => await this.db.Clothes.AnyAsync(c => c.Id == id);
+        public async Task<bool> ProductExistForUserAsync(int id, string userId)
+            => await this.db.Clothes.AnyAsync(c => c.Id == id && c.OwnerId == userId);
 
         public async Task<ClothesFormServiceModel> DetailsAsync(int id)
         {

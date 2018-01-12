@@ -13,5 +13,7 @@
         public int Quantity { get; set; }
 
         public double SinglePrice { get; set; }
+
+        public string OwnerId { get; set; }
     }
 }

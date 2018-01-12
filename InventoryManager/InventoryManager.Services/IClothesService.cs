@@ -8,6 +8,7 @@
     public interface IClothesService
     {
         Task AddAsync(
+            string userId,
             string name,
             ClothesType type,
             int quantity,
@@ -16,11 +17,11 @@
             string pictureUrl,
             string description);
 
-        Task<IEnumerable<ClothesListingServiceModel>> AllClothesAsync(string sort, string order);
+        Task<IEnumerable<ClothesListingServiceModel>> AllClothesAsync(string userId, string sort, string order);
 
         Task<ClothesFormServiceModel> DetailsAsync(int id);
 
-        Task<bool> ProductExistAsync(int id);
+        Task<bool> ProductExistForUserAsync(int id, string userId);
 
         Task DeleteAsync(int id);
 

@@ -32,5 +32,9 @@
         [MinLength(ClothesDescriptionMinLength)]
         [MaxLength(ClothesDescriptionMaxLength)]
         public string Description { get; set; }
+
+        public string OwnerId { get; set; }
+
+        public User Owner { get; set; }
     }
 }

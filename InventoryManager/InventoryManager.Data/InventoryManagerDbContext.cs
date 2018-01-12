@@ -15,6 +15,12 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder
+                .Entity<Clothes>()
+                .HasOne(c => c.Owner)
+                .WithMany(o => o.Clothes)
+                .HasForeignKey(c => c.OwnerId);
+
             base.OnModelCreating(builder);
         }
     }

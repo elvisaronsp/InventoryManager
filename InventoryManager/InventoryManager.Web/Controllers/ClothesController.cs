@@ -1,21 +1,25 @@
 ﻿namespace InventoryManager.Web.Controllers
 {
+    using Data.Models;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Services;
     using Services.Models.Clothes;
     using System.Threading.Tasks;
 
-    using static WebConstants;
-
-    [Authorize(Roles = AdministratorRole)]
+    [Authorize]
     public class ClothesController : Controller
     {
         private readonly IClothesService clothes;
+        private readonly UserManager<User> userManager;
 
-        public ClothesController(IClothesService clothes)
+        public ClothesController(
+            IClothesService clothes,
+            UserManager<User> userManager)
         {
             this.clothes = clothes;
+            this.userManager = userManager;
         }
 
         public IActionResult Add()
@@ -29,7 +33,10 @@
                 return View(model);
             }
 
+            var user = await this.userManager.GetUserAsync(User);
+
             await this.clothes.AddAsync(
+                user.Id,
                 model.Name,
                 model.Type,
                 model.Quantity,
@@ -43,7 +50,9 @@
 
         public async Task<IActionResult> Details(int id)
         {
-            if (!await this.clothes.ProductExistAsync(id))
+            var user = await this.userManager.GetUserAsync(User);
+
+            if (!await this.clothes.ProductExistForUserAsync(id, user.Id))
             {
                 return NotFound();
             }
@@ -56,7 +65,9 @@
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            if (!await this.clothes.ProductExistAsync(id))
+            var user = await this.userManager.GetUserAsync(User);
+
+            if (!await this.clothes.ProductExistForUserAsync(id, user.Id))
             {
                 return NotFound();
             }
@@ -68,7 +79,9 @@
 
         public async Task<IActionResult> Edit(int id)
         {
-            if (!await this.clothes.ProductExistAsync(id))
+            var user = await this.userManager.GetUserAsync(User);
+
+            if (!await this.clothes.ProductExistForUserAsync(id, user.Id))
             {
                 return NotFound();
             }
