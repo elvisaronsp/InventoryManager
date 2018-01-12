@@ -1,16 +1,27 @@
 ﻿namespace InventoryManager.Web.Controllers
 {
-    using Models;
-    using Microsoft.AspNetCore.Mvc;
-    using System.Diagnostics;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using Models;
+    using Services;
+    using System.Diagnostics;
+    using System.Threading.Tasks;
 
     [Authorize]
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IClothesService clothes;
+
+        public HomeController(IClothesService clothes)
         {
-            return View();
+            this.clothes = clothes;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var model = await this.clothes.AllClothesAsync();
+
+            return View(model);
         }
 
         public IActionResult Error()

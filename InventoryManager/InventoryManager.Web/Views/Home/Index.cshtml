@@ -1,3 +1,51 @@
-﻿@{
+﻿@model IEnumerable<ClothesListingServiceModel>
+
+@{
     ViewData["Title"] = "Home Page";
 }
+
+<br />
+@if (User.IsInRole(AdministratorRole))
+{
+    <a asp-controller="Clothes" asp-action="Add" class="btn btn-primary">Add Clothes</a>
+}
+
+<br /><br />
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                <a asp-route-sort="name">Name</a>
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Single Price
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var clothes in Model)
+        {
+                <tr>
+                    <td>
+                        @clothes.Name
+                    </td>
+                    <td>
+                        @clothes.Type
+                    </td>
+                    <td>
+                        @clothes.Quantity
+                    </td>
+                    <td>
+                        @clothes.SinglePrice
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>
