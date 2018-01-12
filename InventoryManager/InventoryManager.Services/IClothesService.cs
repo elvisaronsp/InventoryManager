@@ -17,7 +17,7 @@
             string pictureUrl,
             string description);
 
-        Task<IEnumerable<ClothesListingServiceModel>> AllClothesAsync(string userId, string sort, string order);
+        Task<IEnumerable<ClothesListingServiceModel>> AllClothesAsync(string userId, string sort, string order, string search);
 
         Task<ClothesFormServiceModel> DetailsAsync(int id);
 

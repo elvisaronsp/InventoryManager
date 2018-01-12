@@ -23,11 +23,11 @@
             this.userManager = userManager;
         }
 
-        public async Task<IActionResult> Index(string sort, string order)
+        public async Task<IActionResult> Index(string sort, string order, string search)
         {
             var user = await this.userManager.GetUserAsync(User);
 
-            var model = await this.clothes.AllClothesAsync(user.Id, sort, order);
+            var model = await this.clothes.AllClothesAsync(user.Id, sort, order, search);
 
             return View(model);
         }

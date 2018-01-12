@@ -43,8 +43,10 @@
             await this.db.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<ClothesListingServiceModel>> AllClothesAsync(string userId, string sort, string order)
+        public async Task<IEnumerable<ClothesListingServiceModel>> AllClothesAsync(string userId, string sort, string order, string search)
         {
+            search = search ?? string.Empty;
+
             var result = await this.db.Clothes
                 .Select(c => new ClothesListingServiceModel
                 {
@@ -55,7 +57,7 @@
                     SinglePrice = c.SinglePrice,
                     OwnerId = c.OwnerId
                 })
-                .Where(c => c.OwnerId == userId)
+                .Where(c => c.OwnerId == userId && c.Name.ToLower().Contains(search.ToLower()))
                 .ToListAsync();
 
             var sortType = sort + "_" +order;
