@@ -75,8 +75,74 @@
                 case "singlePrice_descending":
                     return result.OrderByDescending(c => c.SinglePrice);
                 default:
-                    return result;
+                    return result.OrderByDescending(c => c.Id);
             }
+        }
+
+        public async Task<bool> ProductExistAsync(int id)
+            => await this.db.Clothes.AnyAsync(c => c.Id == id);
+
+        public async Task<ClothesFormServiceModel> DetailsAsync(int id)
+        {
+            var clothes = await this.db.Clothes.FindAsync(id);
+
+            return new ClothesFormServiceModel
+            {
+                Name = clothes.Name,
+                Type = clothes.Type,
+                Quantity = clothes.Quantity,
+                Size = clothes.Size,
+                SinglePrice = clothes.SinglePrice,
+                PictureUrl = clothes.PictureUrl,
+                Description = clothes.Description
+            };
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var product = await this.db.Clothes.FindAsync(id);
+
+            this.db.Remove(product);
+            await this.db.SaveChangesAsync();
+        }
+
+        public async Task<ClothesFormServiceModel> GetProductByIdAsync(int id)
+        {
+            var product = await this.db.Clothes.FindAsync(id);
+
+            return new ClothesFormServiceModel
+            {
+                Name = product.Name,
+                Type = product.Type,
+                Quantity = product.Quantity,
+                Size = product.Size,
+                SinglePrice = product.SinglePrice,
+                PictureUrl = product.PictureUrl,
+                Description = product.Description
+            };
+        }
+
+        public async Task EditAsync(
+            int id,
+            string name,
+            ClothesType type,
+            int quantity,
+            ClothesSize size,
+            double singlePrice,
+            string pictureUrl,
+            string description)
+        {
+            var product = await this.db.Clothes.FindAsync(id);
+
+            product.Name = name;
+            product.Type = type;
+            product.Quantity = quantity;
+            product.Size = size;
+            product.SinglePrice = singlePrice;
+            product.PictureUrl = pictureUrl;
+            product.Description = description;
+
+            await this.db.SaveChangesAsync();
         }
     }
 }
