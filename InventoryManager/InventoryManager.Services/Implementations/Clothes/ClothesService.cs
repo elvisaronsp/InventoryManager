@@ -88,22 +88,6 @@
         public async Task<bool> ProductExistForUserAsync(int id, string userId)
             => await this.db.Clothes.AnyAsync(c => c.Id == id && c.OwnerId == userId);
 
-        public async Task<ClothesFormServiceModel> DetailsAsync(int id)
-        {
-            var clothes = await this.db.Clothes.FindAsync(id);
-
-            return new ClothesFormServiceModel
-            {
-                Name = clothes.Name,
-                Type = clothes.Type,
-                Quantity = clothes.Quantity,
-                Size = clothes.Size,
-                SinglePrice = clothes.SinglePrice,
-                PictureUrl = clothes.PictureUrl,
-                Description = clothes.Description
-            };
-        }
-
         public async Task DeleteAsync(int id)
         {
             var product = await this.db.Clothes.FindAsync(id);

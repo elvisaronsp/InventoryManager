@@ -19,8 +19,6 @@
 
         Task<IEnumerable<ClothesListingServiceModel>> AllClothesAsync(string userId, string sort, string order, string search);
 
-        Task<ClothesFormServiceModel> DetailsAsync(int id);
-
         Task<bool> ProductExistForUserAsync(int id, string userId);
 
         Task DeleteAsync(int id);

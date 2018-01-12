@@ -57,7 +57,7 @@
                 return NotFound();
             }
 
-            var model = await this.clothes.DetailsAsync(id);
+            var model = await this.clothes.GetProductByIdAsync(id);
 
             return View(model);
         }

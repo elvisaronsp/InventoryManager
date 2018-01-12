@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryManager.Web", "InventoryManager.Web\InventoryManager.Web.csproj", "{8EA8C53A-9540-4526-AC5E-C21F3D060FB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryManager.Web", "InventoryManager.Web\InventoryManager.Web.csproj", "{8EA8C53A-9540-4526-AC5E-C21F3D060FB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryManager.Data", "InventoryManager.Data\InventoryManager.Data.csproj", "{EC4B75B7-4F35-4E03-BA9C-22E01AB62B10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryManager.Data", "InventoryManager.Data\InventoryManager.Data.csproj", "{EC4B75B7-4F35-4E03-BA9C-22E01AB62B10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryManager.Services", "InventoryManager.Services\InventoryManager.Services.csproj", "{385B98BA-7FD2-45CB-8456-83F5B4C3779E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryManager.Services", "InventoryManager.Services\InventoryManager.Services.csproj", "{385B98BA-7FD2-45CB-8456-83F5B4C3779E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryManager.Test", "InventoryManager.Test\InventoryManager.Test.csproj", "{776B3C0E-466E-49C2-8063-41A37BD9548B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{385B98BA-7FD2-45CB-8456-83F5B4C3779E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{385B98BA-7FD2-45CB-8456-83F5B4C3779E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{385B98BA-7FD2-45CB-8456-83F5B4C3779E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{776B3C0E-466E-49C2-8063-41A37BD9548B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{776B3C0E-466E-49C2-8063-41A37BD9548B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{776B3C0E-466E-49C2-8063-41A37BD9548B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{776B3C0E-466E-49C2-8063-41A37BD9548B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
