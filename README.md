@@ -1,2 +1,2 @@
 # InventoryManager
-ASP.NET MVC App
+ASP.NET MVC Core App
